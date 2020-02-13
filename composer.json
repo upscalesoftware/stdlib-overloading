@@ -1,0 +1,21 @@
+{
+    "name": "upscale/stdlib-overloading",
+    "description": "PHP7 function/method arguments overloading",
+    "version": "1.0.0",
+    "keywords": ["overload", "overloading", "signature", "arguments"],
+    "homepage": "https://github.com/upscalesoftware/stdlib-overloading",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Upscale Software Team",
+            "email": "info@upscalesoftware.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "files": ["src/overload.php"],
+        "psr-4": {"Upscale\\Stdlib\\Overloading\\": "src/"}
+    }
+}
