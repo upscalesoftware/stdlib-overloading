@@ -1,4 +1,4 @@
-Function Overloading
+Function Overloading [![Build Status](https://api.travis-ci.org/upscalesoftware/stdlib-overloading.svg?branch=master)](https://travis-ci.org/upscalesoftware/stdlib-overloading)
 ====================
 
 This library introduces function/method [overloading](https://en.wikipedia.org/wiki/Function_overloading) – varying implementation depending on input arguments.
