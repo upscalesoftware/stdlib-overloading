@@ -14,8 +14,16 @@
     "require": {
         "php": ">=7.1"
     },
+    "require-dev": {
+        "phpunit/phpunit": "^7.0"
+    },
     "autoload": {
         "files": ["src/overload.php"],
         "psr-4": {"Upscale\\Stdlib\\Overloading\\": "src/"}
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Upscale\\Stdlib\\Overloading\\Tests\\": "tests/"
+        }
     }
 }
