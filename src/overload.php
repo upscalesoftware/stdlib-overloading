@@ -1,4 +1,8 @@
 <?php
+/**
+ * Copyright © Upscale Software. All rights reserved.
+ * See COPYRIGHT.txt for license details.
+ */
 declare(strict_types=1);
 
 namespace Upscale\Stdlib\Overloading;
