@@ -52,7 +52,7 @@ func('a', 'b');
 
 ### Example
 
-Arithmetic calculator that works with both numbers and [Money](https://www.martinfowler.com/eaaCatalog/money.html) objects.
+Arithmetic calculator that works with ordinary integers, arbitrary-length [GMP](https://www.php.net/manual/en/book.gmp.php) integers, and [Money](https://www.martinfowler.com/eaaCatalog/money.html) objects.
 
 ```php
 <?php
@@ -71,7 +71,7 @@ class Money
         $this->currency = $currency;
     }
 
-    public function add(Money $sum): Money
+    public function add(self $sum): self
     {
         if ($sum->currency != $this->currency) {
             throw new \InvalidArgumentException('Money currency mismatch');
@@ -88,6 +88,9 @@ class Calculator
             function (int $num1, int $num2): int {
                 return $num1 + $num2;
             },
+            function (\GMP $num1, \GMP $num2): \GMP {
+                return gmp_add($num1, $num2);
+            },
             function (Money $sum1, Money $sum2): Money {
                 return $sum1->add($sum2);
             }
@@ -97,13 +100,20 @@ class Calculator
 
 
 $calc = new Calculator();
-$one = new Money(1, 'USD');
-$two = new Money(2, 'USD');
+
+$one = gmp_init(1);
+$two = gmp_init(2);
+
+$oneUsd = new Money(1, 'USD');
+$twoUsd = new Money(2, 'USD');
 
 print_r($calc->add(1, 2));
 // 3
 
 print_r($calc->add($one, $two));
+// GMP Object([num] => 3)
+
+print_r($calc->add($oneUsd, $twoUsd));
 // Money Object([amount:Money:private] => 3 [currency:Money:private] => USD)
 
 print_r($calc->add(1.25, 2));
