@@ -23,6 +23,9 @@ function overload(callable ...$implementations): callable
                 return $candidate(...$args);
             } catch (\TypeError $e) {
                 $error = $e;
+                if (strncmp($error->getMessage(), 'Return value of ', 16) === 0) {
+                    break;
+                }
             }
         }
         throw $error;

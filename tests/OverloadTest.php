@@ -170,6 +170,24 @@ class OverloadTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
+     * @expectedException \TypeError
+     * @expectedExceptionMessage must be of the type integer, string returned
+     */
+    public function testCallbackExclusive()
+    {
+        $subject = overload(
+            function (): int {
+                return 'return type mismatch';
+            },
+            function () {
+                // Unreachable because preceding callback is executed even though unsuccessfully
+                throw new \LogicException('Unreachable implementation executed');
+            }
+        );
+        $subject();
+    }
+
+    /**
      * @expectedException \LogicException
      */
     public function testCallbackNone()
