@@ -12,12 +12,15 @@ namespace Upscale\Stdlib\Overloading;
  *
  * @param callable[] $implementations
  * @return callable
- * @throws \LogicException|\Error
+ * @throws \InvalidArgumentException
  */
 function overload(callable ...$implementations): callable
 {
+    if (!$implementations) {
+        throw new \InvalidArgumentException('Missing overload declaration.');
+    }
     return function (...$args) use ($implementations) {
-        $error = new \LogicException('Invalid overloaded implementations');
+        $error = null;
         foreach ($implementations as $candidate) {
             try {
                 return $candidate(...$args);

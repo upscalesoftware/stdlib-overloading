@@ -188,11 +188,11 @@ class OverloadTest extends \PHPUnit\Framework\TestCase
     }
 
     /**
-     * @expectedException \LogicException
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Missing overload declaration
      */
     public function testCallbackNone()
     {
-        $subject = overload();
-        $subject();
+        overload();
     }
 }
