@@ -171,7 +171,7 @@ class OverloadTest extends \PHPUnit\Framework\TestCase
 
     /**
      * @expectedException \TypeError
-     * @expectedExceptionMessage must be of the type integer, string returned
+     * @expectedExceptionMessage must be of the type int
      */
     public function testCallbackExclusive()
     {
