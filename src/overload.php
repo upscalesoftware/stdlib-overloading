@@ -26,7 +26,10 @@ function overload(callable ...$implementations): callable
                 return $candidate(...$args);
             } catch (\TypeError $e) {
                 $error = $e;
-                if (strncmp($error->getMessage(), 'Return value of ', 16) === 0) {
+                [$caller] = $error->getTrace();
+                $isThrownDirectly = ($caller['file'] == __FILE__);
+                $isReturnTypeError = (strncmp($error->getMessage(), 'Return value of ', 16) === 0);
+                if (!$isThrownDirectly || $isReturnTypeError) {
                     break;
                 }
             }
