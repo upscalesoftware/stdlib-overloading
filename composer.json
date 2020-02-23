@@ -1,7 +1,7 @@
 {
     "name": "upscale/stdlib-overloading",
     "description": "PHP7 function/method arguments overloading",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "keywords": ["overload", "overloading", "function", "method", "signature", "arguments"],
     "homepage": "https://github.com/upscalesoftware/stdlib-overloading",
     "license": "Apache-2.0",
