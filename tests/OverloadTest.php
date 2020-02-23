@@ -194,15 +194,33 @@ class OverloadTest extends \PHPUnit\Framework\TestCase
     public function testCallbackNestedTypeError()
     {
         $subject = overload(
-            function () {
-                return random_int(1, 'two');
+            function (...$args) {
+                return random_int(...$args);
             },
             function () {
                 // Unreachable because preceding callback is executed even though unsuccessfully
                 throw new \LogicException('Unreachable implementation executed');
             }
         );
-        $subject();
+        $subject(1, 'two');
+    }
+
+    /**
+     * @expectedException \TypeError
+     * @expectedExceptionMessage expects parameter 2 to be int
+     */
+    public function testCallbackNestedOverloadError()
+    {
+        $subject = overload(
+            overload(
+                'random_int'
+            ),
+            function () {
+                // Unreachable because preceding callback is executed even though unsuccessfully
+                throw new \LogicException('Unreachable implementation executed');
+            }
+        );
+        $subject(1, 'two');
     }
 
     /**
